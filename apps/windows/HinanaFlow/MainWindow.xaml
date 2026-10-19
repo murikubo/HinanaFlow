@@ -1,0 +1,36 @@
+<Window x:Class="HinanaFlow.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="Hinana Flow">
+  <ScrollViewer><StackPanel Padding="24" Spacing="12">
+    <TextBlock Text="Hinana Flow · TLS/텍스트 진단" FontSize="28" />
+    <TextBlock Text="처음 연결할 때 상대 화면의 전체 64자리 공개키 지문을 직접 확인하세요. LAN으로 받은 지문은 신뢰하지 마세요." TextWrapping="Wrap" />
+    <Button x:Name="PrepareButton" Content="OS 신원 생성 또는 불러오기" Click="PrepareIdentity" />
+    <TextBlock Text="내 공개키 SHA-256 지문" />
+    <TextBox x:Name="Fingerprint" IsReadOnly="True" />
+    <TextBox x:Name="LocalAddress" Header="선택 LAN의 내 IPv4" />
+    <TextBox x:Name="PeerAddress" Header="상대 IPv4 (동일 subnet)" />
+    <TextBox x:Name="Port" Header="TCP 포트" Text="45731" />
+    <TextBox x:Name="PeerFingerprint" Header="직접 확인한 상대 전체 지문 (64 hex)" />
+    <CheckBox x:Name="OobConfirmed" Content="상대 기기 화면에서 전체 지문을 직접 확인했습니다" />
+    <StackPanel Orientation="Horizontal" Spacing="12">
+      <Button x:Name="ListenButton" Content="TLS 수신 대기" Click="Listen" />
+      <Button x:Name="ConnectButton" Content="TLS 연결" Click="Connect" />
+      <Button Content="종료" Click="CloseSession" />
+      <Button Content="상대 신뢰 삭제" Click="ForgetPeer" />
+    </StackPanel>
+    <TextBlock x:Name="SessionStatus" Text="중지됨" TextWrapping="Wrap" />
+    <TextBox x:Name="Draft" Header="보낼 텍스트 (최대 8192 Unicode scalar)" AcceptsReturn="True" Height="100" TextWrapping="Wrap" />
+    <Button x:Name="SendButton" Content="이 텍스트의 전송 제안 승인" Click="SendText" IsEnabled="False" />
+    <TextBlock x:Name="Pending" />
+    <StackPanel Orientation="Horizontal" Spacing="12">
+      <Button x:Name="ApproveButton" Content="이번 텍스트 수신 승인" Click="Approve" IsEnabled="False" />
+      <Button x:Name="DenyButton" Content="거부" Click="Deny" IsEnabled="False" />
+    </StackPanel>
+    <TextBox x:Name="Received" Header="승인 후 수신한 텍스트 (종료 시 지움)" IsReadOnly="True" AcceptsReturn="True" TextWrapping="Wrap" />
+    <TextBlock Text="파일 전송 비활성 · 최대 세션 10분 · 자동 클립보드 접근 없음" />
+    <StackPanel Orientation="Horizontal" Spacing="12">
+      <Button Content="30초간 기기 탐색" Click="StartDiscovery" />
+      <Button Content="탐색 중지" Click="StopDiscovery" />
+    </StackPanel>
+    <TextBlock x:Name="Status" Text="탐색 중지됨" />
+    <ListView x:Name="Peers" Height="120" />
+  </StackPanel></ScrollViewer>
+</Window>

@@ -1,0 +1,33 @@
+.DS_Store
+.build/
+build/
+bin/
+obj/
+.gradle/
+local.properties
+*.user
+*.xcuserstate
+__pycache__/
+*.p12
+*.pfx
+*.key
+dist/
+*.core
+
+# Local instructions, documentation and verification reports
+*.md
+docs/
+# Disposable transfer fixtures and exported test copies (generator is tracked)
+tests/fixtures/
+# IDE state, machine-specific configuration and signing material
+.swiftpm/
+xcuserdata/
+.env
+.env.*
+*.pem
+*.p8
+*.mobileprovision
+*.provisionprofile
+*.xcarchive
+*.ipa
+*.zip

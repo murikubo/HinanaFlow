@@ -1,0 +1,68 @@
+{
+  "profile": "apple-single-file-1",
+  "maximumFileSize": 10000000,
+  "maximumChunkData": 32768,
+  "frames": [
+    {
+      "name": "chunk-small",
+      "hex": "020000001a00000000000000000000000000000001000000000000000000ff",
+      "valid": true
+    },
+    {
+      "name": "chunk-offset",
+      "hex": "020000001b000000000000000000000000000000010000000000008000616263",
+      "valid": true
+    },
+    {
+      "name": "empty-chunk",
+      "hex": "0200000018000000000000000000000000000000010000000000000000",
+      "valid": false
+    },
+    {
+      "name": "offset-overflow",
+      "hex": "020000001900000000000000000000000000000001ffffffffffffffff61",
+      "valid": false
+    },
+    {
+      "name": "unknown-kind",
+      "hex": "0300000003616263",
+      "valid": false
+    },
+    {
+      "name": "oversized-chunk-header",
+      "hex": "0200008019",
+      "valid": false
+    }
+  ],
+  "limits": [
+    {
+      "size": 0,
+      "allowed": true
+    },
+    {
+      "size": 1,
+      "allowed": true
+    },
+    {
+      "size": 9999999,
+      "allowed": true
+    },
+    {
+      "size": 10000000,
+      "allowed": true
+    },
+    {
+      "size": 10000001,
+      "allowed": false
+    },
+    {
+      "size": 1073741824,
+      "allowed": false
+    }
+  ],
+  "fixture": {
+    "size": 262144,
+    "pattern": "byte[i] = i % 256",
+    "sha256": "2312394bd99545d9de131c24efb781e765ac1aec243f2ed9347597a793a415e9"
+  }
+}

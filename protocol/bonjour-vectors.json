@@ -1,0 +1,130 @@
+{
+  "services": [
+    {
+      "name": "Hinana Flow-abc123",
+      "type": "_hinanaflow._tcp",
+      "domain": "local.",
+      "valid": true
+    },
+    {
+      "name": "trusted device",
+      "type": "_hinanaflow._tcp.",
+      "domain": "LOCAL.",
+      "valid": true
+    },
+    {
+      "name": "fake",
+      "type": "_hinanaflow._tcp",
+      "domain": "example.com.",
+      "valid": false
+    },
+    {
+      "name": "fake",
+      "type": "_http._tcp",
+      "domain": "local.",
+      "valid": false
+    },
+    {
+      "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "type": "_hinanaflow._tcp",
+      "domain": "local.",
+      "valid": false
+    }
+  ],
+  "hosts": [
+    {
+      "host": "mac.local.",
+      "valid": true
+    },
+    {
+      "host": "MAC.LOCAL.",
+      "valid": true
+    },
+    {
+      "host": "mac.local.example.",
+      "valid": false
+    },
+    {
+      "host": "example.com.",
+      "valid": false
+    },
+    {
+      "host": "local.",
+      "valid": false
+    }
+  ],
+  "routes": [
+    {
+      "local": "192.168.0.22",
+      "peer": "192.168.0.24",
+      "mask": "255.255.255.0",
+      "valid": true
+    },
+    {
+      "local": "192.168.0.22",
+      "peer": "192.168.1.24",
+      "mask": "255.255.255.0",
+      "valid": false
+    },
+    {
+      "local": "192.168.0.22",
+      "peer": "8.8.8.8",
+      "mask": "255.255.255.0",
+      "valid": false
+    },
+    {
+      "local": "192.168.0.22",
+      "peer": "192.168.0.22",
+      "mask": "255.255.255.0",
+      "valid": false
+    },
+    {
+      "local": "192.168.0.22",
+      "peer": "192.168.0.255",
+      "mask": "255.255.255.0",
+      "valid": false
+    },
+    {
+      "local": "fe80::1",
+      "peer": "fe80::2",
+      "mask": "ffff:ffff:ffff:ffff::",
+      "valid": true
+    },
+    {
+      "local": "fd12:3456::1",
+      "peer": "fd12:3456::2",
+      "mask": "ffff:ffff:ffff:ffff::",
+      "valid": true
+    },
+    {
+      "local": "fd12:3456::1",
+      "peer": "fd12:3457::2",
+      "mask": "ffff:ffff:ffff:ffff::",
+      "valid": false
+    },
+    {
+      "local": "fe80::1",
+      "peer": "2606:4700:4700::1111",
+      "mask": "ffff:ffff:ffff:ffff::",
+      "valid": false
+    },
+    {
+      "local": "fe80::1",
+      "peer": "::ffff:192.168.0.24",
+      "mask": "ffff:ffff:ffff:ffff::",
+      "valid": false
+    },
+    {
+      "local": "fe80::1",
+      "peer": "ff02::1",
+      "mask": "ffff:ffff:ffff:ffff::",
+      "valid": false
+    },
+    {
+      "local": "fe80::1",
+      "peer": "::1",
+      "mask": "ffff:ffff:ffff:ffff::",
+      "valid": false
+    }
+  ]
+}

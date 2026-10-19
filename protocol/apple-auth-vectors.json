@@ -1,0 +1,471 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "name": "unpaired-default",
+      "steps": [],
+      "expectedReady": false,
+      "expectedError": false
+    },
+    {
+      "name": "OOB-is-not-TLS",
+      "steps": [
+        {
+          "op": "active",
+          "value": true
+        },
+        {
+          "op": "begin",
+          "oob": true
+        }
+      ],
+      "expectedReady": false,
+      "expectedError": false
+    },
+    {
+      "name": "TLS-is-not-persisted-trust",
+      "steps": [
+        {
+          "op": "active",
+          "value": true
+        },
+        {
+          "op": "begin",
+          "oob": true
+        },
+        {
+          "op": "tls"
+        }
+      ],
+      "expectedReady": false,
+      "expectedError": false
+    },
+    {
+      "name": "first-pairing-ready",
+      "steps": [
+        {
+          "op": "active",
+          "value": true
+        },
+        {
+          "op": "begin",
+          "oob": true
+        },
+        {
+          "op": "tls"
+        },
+        {
+          "op": "persist"
+        }
+      ],
+      "expectedReady": true,
+      "expectedError": false
+    },
+    {
+      "name": "stored-key-ready",
+      "steps": [
+        {
+          "op": "active",
+          "value": true
+        },
+        {
+          "op": "begin",
+          "stored": "same",
+          "oob": false
+        },
+        {
+          "op": "tls"
+        },
+        {
+          "op": "persist"
+        }
+      ],
+      "expectedReady": true,
+      "expectedError": false
+    },
+    {
+      "name": "no-OOB-no-stored-key",
+      "steps": [
+        {
+          "op": "active",
+          "value": true
+        },
+        {
+          "op": "begin",
+          "oob": false
+        }
+      ],
+      "expectedReady": false,
+      "expectedError": true
+    },
+    {
+      "name": "changed-key-despite-OOB",
+      "steps": [
+        {
+          "op": "active",
+          "value": true
+        },
+        {
+          "op": "begin",
+          "stored": "other",
+          "oob": true
+        }
+      ],
+      "expectedReady": false,
+      "expectedError": true
+    },
+    {
+      "name": "malformed-stored-key",
+      "steps": [
+        {
+          "op": "active",
+          "value": true
+        },
+        {
+          "op": "begin",
+          "stored": "short",
+          "oob": true
+        }
+      ],
+      "expectedReady": false,
+      "expectedError": true
+    },
+    {
+      "name": "self-key",
+      "steps": [
+        {
+          "op": "active",
+          "value": true
+        },
+        {
+          "op": "begin",
+          "oob": true,
+          "peer": "self"
+        }
+      ],
+      "expectedReady": false,
+      "expectedError": true
+    },
+    {
+      "name": "short-pin",
+      "steps": [
+        {
+          "op": "active",
+          "value": true
+        },
+        {
+          "op": "begin",
+          "oob": true,
+          "peer": "short"
+        }
+      ],
+      "expectedReady": false,
+      "expectedError": true
+    },
+    {
+      "name": "inactive-begin",
+      "steps": [
+        {
+          "op": "begin",
+          "oob": true
+        }
+      ],
+      "expectedReady": false,
+      "expectedError": true
+    },
+    {
+      "name": "TLS12-rejected",
+      "steps": [
+        {
+          "op": "active",
+          "value": true
+        },
+        {
+          "op": "begin",
+          "oob": true
+        },
+        {
+          "op": "tls",
+          "tls13": false
+        }
+      ],
+      "expectedReady": false,
+      "expectedError": true
+    },
+    {
+      "name": "unverified-peer-rejected",
+      "steps": [
+        {
+          "op": "active",
+          "value": true
+        },
+        {
+          "op": "begin",
+          "oob": true
+        },
+        {
+          "op": "tls",
+          "peerVerified": false
+        }
+      ],
+      "expectedReady": false,
+      "expectedError": true
+    },
+    {
+      "name": "no-client-identity-rejected",
+      "steps": [
+        {
+          "op": "active",
+          "value": true
+        },
+        {
+          "op": "begin",
+          "oob": true
+        },
+        {
+          "op": "tls",
+          "localPresented": false
+        }
+      ],
+      "expectedReady": false,
+      "expectedError": true
+    },
+    {
+      "name": "actual-pin-mismatch",
+      "steps": [
+        {
+          "op": "active",
+          "value": true
+        },
+        {
+          "op": "begin",
+          "oob": true
+        },
+        {
+          "op": "tls",
+          "peer": "other"
+        }
+      ],
+      "expectedReady": false,
+      "expectedError": true
+    },
+    {
+      "name": "persist-before-TLS",
+      "steps": [
+        {
+          "op": "active",
+          "value": true
+        },
+        {
+          "op": "begin",
+          "oob": true
+        },
+        {
+          "op": "persist"
+        }
+      ],
+      "expectedReady": false,
+      "expectedError": true
+    },
+    {
+      "name": "TLS-before-begin",
+      "steps": [
+        {
+          "op": "active",
+          "value": true
+        },
+        {
+          "op": "tls"
+        }
+      ],
+      "expectedReady": false,
+      "expectedError": true
+    },
+    {
+      "name": "inactive-during-handshake",
+      "steps": [
+        {
+          "op": "active",
+          "value": true
+        },
+        {
+          "op": "begin",
+          "oob": true
+        },
+        {
+          "op": "active",
+          "value": false
+        },
+        {
+          "op": "tls"
+        }
+      ],
+      "expectedReady": false,
+      "expectedError": true
+    },
+    {
+      "name": "inactive-before-persist",
+      "steps": [
+        {
+          "op": "active",
+          "value": true
+        },
+        {
+          "op": "begin",
+          "oob": true
+        },
+        {
+          "op": "tls"
+        },
+        {
+          "op": "active",
+          "value": false
+        },
+        {
+          "op": "persist"
+        }
+      ],
+      "expectedReady": false,
+      "expectedError": true
+    },
+    {
+      "name": "inactive-after-ready",
+      "steps": [
+        {
+          "op": "active",
+          "value": true
+        },
+        {
+          "op": "begin",
+          "oob": true
+        },
+        {
+          "op": "tls"
+        },
+        {
+          "op": "persist"
+        },
+        {
+          "op": "active",
+          "value": false
+        }
+      ],
+      "expectedReady": false,
+      "expectedError": false
+    },
+    {
+      "name": "activation-does-not-reconnect",
+      "steps": [
+        {
+          "op": "active",
+          "value": true
+        },
+        {
+          "op": "begin",
+          "oob": true
+        },
+        {
+          "op": "tls"
+        },
+        {
+          "op": "persist"
+        },
+        {
+          "op": "active",
+          "value": false
+        },
+        {
+          "op": "active",
+          "value": true
+        }
+      ],
+      "expectedReady": false,
+      "expectedError": false
+    },
+    {
+      "name": "storage-failure-closes",
+      "steps": [
+        {
+          "op": "active",
+          "value": true
+        },
+        {
+          "op": "begin",
+          "oob": true
+        },
+        {
+          "op": "tls"
+        },
+        {
+          "op": "close"
+        }
+      ],
+      "expectedReady": false,
+      "expectedError": false
+    },
+    {
+      "name": "duplicate-ready-evidence",
+      "steps": [
+        {
+          "op": "active",
+          "value": true
+        },
+        {
+          "op": "begin",
+          "oob": true
+        },
+        {
+          "op": "tls"
+        },
+        {
+          "op": "persist"
+        },
+        {
+          "op": "tls"
+        }
+      ],
+      "expectedReady": false,
+      "expectedError": true
+    },
+    {
+      "name": "explicit-reconnect",
+      "steps": [
+        {
+          "op": "active",
+          "value": true
+        },
+        {
+          "op": "begin",
+          "oob": true
+        },
+        {
+          "op": "tls"
+        },
+        {
+          "op": "persist"
+        },
+        {
+          "op": "active",
+          "value": false
+        },
+        {
+          "op": "active",
+          "value": true
+        },
+        {
+          "op": "begin",
+          "oob": false,
+          "stored": "same"
+        },
+        {
+          "op": "tls"
+        },
+        {
+          "op": "persist"
+        }
+      ],
+      "expectedReady": true,
+      "expectedError": false
+    }
+  ]
+}
