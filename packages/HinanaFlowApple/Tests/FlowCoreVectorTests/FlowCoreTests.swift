@@ -535,3 +535,10 @@ try isolated.recoverOrphans()
 try require(FileManager.default.fileExists(atPath:productionStage.path),"RC recovery must preserve production stage")
 try require(!FileManager.default.fileExists(atPath:rcStage.path),"RC recovery removes only RC stage")
 print("PASS RC orphan recovery cannot enter production storage")
+
+for other in [ValidationProfile.production,.releaseCandidate] {
+    try require(ValidationProfile.androidInterop.identityLabel != other.identityLabel,"Android test identity isolation")
+    try require(ValidationProfile.androidInterop.trustService != other.trustService,"Android test trust isolation")
+    try require(ValidationProfile.androidInterop.transferDirectory != other.transferDirectory,"Android test file isolation")
+}
+print("PASS Android interoperability profile never reuses production/RC namespace")

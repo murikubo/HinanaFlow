@@ -28,6 +28,7 @@ import AppKit
             ScrollView {
                 VStack(alignment:.leading,spacing:20) {
                     header
+                    if model.profile == .androidInterop {Text("Android 연동 검증 전용 · 기존 키/신뢰/파일과 분리됨").font(.headline).foregroundStyle(.orange)}
                     if model.profile == .releaseCandidate {Text("RC 검증 전용 · 운영 키/신뢰/파일과 분리됨").font(.headline).foregroundStyle(.orange)}
                     statusCard
                     consentCards
